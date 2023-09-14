@@ -10,5 +10,7 @@
 ## URL avec les valeurs par défaut
 
 - Symfony : http://localhost:7071/
+    - Documentation API : http://localhost:7071/api
+    
 - PhpMyadmin : http://localhost:7070/
 - Maildev : http://localhost:7072/
