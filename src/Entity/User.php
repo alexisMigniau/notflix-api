@@ -18,7 +18,7 @@ use App\Entity\Trait\Timestampable;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
     operations: [
-        new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user:create']]),
+        new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user:create']],  uriTemplate: 'register'),
         new Get(),
         new Put(processor: UserPasswordHasher::class),
     ],

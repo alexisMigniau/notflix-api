@@ -2,6 +2,11 @@ api_platform:
     title: Notflix
     version: 1.0.0
     # Good defaults for REST APIs
+    swagger:
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header
     defaults:
         stateless: true
         cache_headers:
