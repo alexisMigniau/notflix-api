@@ -19,6 +19,7 @@ setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
 
 - Symfony : http://localhost:7071/
     - Documentation API : http://localhost:7071/api
+    - Dashboard : http://localhost:7071/dashboard
     
 - PhpMyadmin : http://localhost:7070/
 - Maildev : http://localhost:7072/
