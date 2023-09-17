@@ -32,12 +32,13 @@
   // "postCreateCommand": "apt-get install git openssh",
   // Add the IDs of extensions you want installed when the container is created in the array below.
   "extensions": [
-    "bmewburn.vscode-intelephense-client",
-    "junstyle.php-cs-fixer",
-    "editorconfig.editorconfig",
-    "neilbrayfield.php-docblocker",
-    "kaiwood.insert-cursor-at-beginning-of-each-line-selected",
-    "mykhailokushnir.vscode-php-getter-setter",
-    "syler.sass-indented"
-  ]
+	"bmewburn.vscode-intelephense-client",
+	"junstyle.php-cs-fixer",
+	"editorconfig.editorconfig",
+	"neilbrayfield.php-docblocker",
+	"kaiwood.insert-cursor-at-beginning-of-each-line-selected",
+	"mykhailokushnir.vscode-php-getter-setter",
+	"syler.sass-indented",
+	"TheNouillet.symfony-vscode"
+]
 }
