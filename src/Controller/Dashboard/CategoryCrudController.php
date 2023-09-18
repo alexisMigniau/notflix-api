@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class CategoryCrudController extends AbstractCrudController
+class CategoryCrudController extends TimestampCrudController
 {
     public static function getEntityFqcn(): string
     {
@@ -17,11 +17,9 @@ class CategoryCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')->onlyOnIndex(),
+        return array_merge([
+            IdField::new('id')->setFormTypeOption('disabled','disabled'),
             TextField::new('label'),
-            DateTimeField::new('createdAt')->setFormTypeOption('disabled','disabled'),
-            DateTimeField::new('updatedAt')->setFormTypeOption('disabled','disabled')
-        ];
+        ], parent::configureFields($pageName));
     }
 }

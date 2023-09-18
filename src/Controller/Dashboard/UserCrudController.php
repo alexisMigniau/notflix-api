@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\{PasswordType};
 use Symfony\Component\Form\{FormBuilderInterface, FormEvent, FormEvents};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserCrudController extends AbstractCrudController
+class UserCrudController extends TimestampCrudController
 {
     private $userPasswordHasher;
 
@@ -29,7 +29,7 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        return array_merge([
             IdField::new('id')->setFormTypeOption('disabled','disabled'),
             EmailField::new('email'),
             ChoiceField::new('roles')
@@ -44,9 +44,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('plainPassword', 'Password')->setFormType(PasswordType::class)
                 ->setRequired($pageName === Crud::PAGE_NEW)
                 ->onlyOnForms(),
-            DateTimeField::new('createdAt')->setFormTypeOption('disabled','disabled'),
-            DateTimeField::new('updatedAt')->setFormTypeOption('disabled','disabled')
-        ];
+        ], parent::configureFields($pageName));
     }
 
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface

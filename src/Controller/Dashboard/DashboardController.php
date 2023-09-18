@@ -3,6 +3,7 @@
 namespace App\Controller\Dashboard;
 
 use App\Entity\Category;
+use App\Entity\Movie;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -34,6 +35,7 @@ class DashboardController extends AbstractDashboardController
 
             MenuItem::section('Contents'),
             MenuItem::linkToCrud('Categories', 'fa fa-tag', Category::class),
+            MenuItem::linkToCrud('Movies', 'fa fa-film', Movie::class),
         ];
     }
 }
