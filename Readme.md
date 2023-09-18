@@ -7,7 +7,7 @@
 - Lancer les containers
 - Il faut travailler depuis le conteneur php, vous pouvez utiliser l'extension [Dev container](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-## Création de clé pour l'authenytification (Obligatoire)
+## Création de clé pour l'authentification (Obligatoire)
 
 ```console
 php bin/console lexik:jwt:generate-keypair

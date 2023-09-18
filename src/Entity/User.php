@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -14,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\State\UserPasswordHasher;
 use App\Entity\Trait\Timestampable;
+use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
@@ -29,11 +31,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;
 
-    #[Groups(['user:item'])]
+    #[ApiProperty(identifier: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[Groups(['user:item'])]
+    #[ORM\Column(type: "uuid")]
+    #[ApiProperty(identifier: true)]
+    private ?string $uuid = null;
 
     #[Groups(['user:item', 'user:create', 'user:update'])]
     #[Assert\NotBlank]
@@ -53,6 +60,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(groups: ['user:create'])]
     #[Groups(['user:create', 'user:update'])]
     private ?string $plainPassword = null;
+
+    public function __construct()
+    {
+        $this->uuid = Uuid::uuid4()->toString();
+    }
 
     public function getId(): ?int
     {
@@ -131,5 +143,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         $this->plainPassword = null;
+    }
+
+    /**
+     * Get the value of uuid
+     *
+     * @return ?string
+     */
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * Set the value of uuid
+     *
+     * @param ?string $uuid
+     *
+     * @return self
+     */
+    public function setUuid(?string $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
     }
 }
