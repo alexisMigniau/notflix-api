@@ -30,7 +30,7 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->onlyOnIndex(),
+            IdField::new('id')->setFormTypeOption('disabled','disabled'),
             EmailField::new('email'),
             ChoiceField::new('roles')
                 ->allowMultipleChoices()
@@ -44,8 +44,8 @@ class UserCrudController extends AbstractCrudController
             TextField::new('plainPassword', 'Password')->setFormType(PasswordType::class)
                 ->setRequired($pageName === Crud::PAGE_NEW)
                 ->onlyOnForms(),
-            DateTimeField::new('createdAt')->onlyOnIndex(),
-            DateTimeField::new('updatedAt')->onlyOnIndex(),
+            DateTimeField::new('createdAt')->setFormTypeOption('disabled','disabled'),
+            DateTimeField::new('updatedAt')->setFormTypeOption('disabled','disabled')
         ];
     }
 
