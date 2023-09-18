@@ -21,16 +21,18 @@ class UserCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('email'),
+            ChoiceField::new('roles')
+                ->allowMultipleChoices()
+                ->renderAsBadges([
+                    'ROLE_ADMIN' => 'primary',
+                    'ROLE_USER' => 'secondary',
+                ])->setChoices([
+                    'Admin' => 'ROLE_ADMIN',
+                    'User' => 'ROLE_USER'
+                ])->renderExpanded(),
             TextField::new('plainPassword', 'Password')->onlyOnForms(),
             DateTimeField::new('createdAt')->onlyOnIndex(),
             DateTimeField::new('updatedAt')->onlyOnIndex(),
-            ChoiceField::new('roles')->allowMultipleChoices()->renderAsBadges([
-                'ROLE_ADMIN' => 'primary',
-                'ROLE_USER' => 'secondary',
-            ])->setChoices([
-                'Admin' => 'ROLE_ADMIN',
-                'User' => 'ROLE_USER'
-            ])->renderExpanded()
         ];
     }
 }

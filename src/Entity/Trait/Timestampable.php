@@ -6,28 +6,19 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Timestampable {
 
     use TimestampableEntity;
 
-    /**
-     * @var \DateTime|null
-     * @Gedmo\Timestampable(on="create")
-     * @Groups({"timestampable"})
-     * @ORM\Column(type="datetime")
-     */
     #[Gedmo\Timestampable(on: 'create')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['timestampable'])]
     protected $createdAt;
 
-    /**
-     * @var \DateTime|null
-     * @Gedmo\Timestampable(on="update")
-     * @Groups({"timestampable"})
-     * @ORM\Column(type="datetime")
-     */
     #[Gedmo\Timestampable(on: 'update')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['timestampable'])]
     protected $updatedAt;
 }
