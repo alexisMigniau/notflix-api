@@ -6,21 +6,20 @@ use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Trait\Timestampable;
-use App\Repository\MovieRepository;
-use DateTime;
+use App\Repository\SerieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-#[ORM\Entity(repositoryClass: MovieRepository::class)]
+#[ORM\Entity(repositoryClass: SerieRepository::class)]
 #[ApiResource(
     operations: [
         new GetCollection()
     ],
 )]
-class Movie
+class Serie
 {
     use Timestampable;
 
@@ -44,17 +43,12 @@ class Movie
     #[ORM\Column(nullable: true)]
     private ?int $age_restriction = null;
 
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $publication_date = null;
-
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'movies')]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'series')]
     private Collection $categories;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->publication_date = new DateTime();
     }
 
     public function getId(): ?int
@@ -98,18 +92,6 @@ class Movie
         return $this;
     }
 
-    public function getPublicationDate(): ?\DateTimeInterface
-    {
-        return $this->publication_date;
-    }
-
-    public function setPublicationDate(\DateTimeInterface $publication_date): self
-    {
-        $this->publication_date = $publication_date;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Category>
      */
@@ -134,24 +116,12 @@ class Movie
         return $this;
     }
 
-    /**
-     * Get the value of slug
-     *
-     * @return ?string
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * Set the value of slug
-     *
-     * @param ?string $slug
-     *
-     * @return self
-     */
-    public function setSlug(?string $slug): self
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 

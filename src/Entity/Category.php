@@ -32,9 +32,13 @@ class Category
     #[ORM\ManyToMany(targetEntity: Movie::class, mappedBy: 'categories')]
     private Collection $movies;
 
+    #[ORM\ManyToMany(targetEntity: Serie::class, mappedBy: 'categories')]
+    private Collection $series;
+
     public function __construct()
     {
         $this->movies = new ArrayCollection();
+        $this->series = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -81,6 +85,33 @@ class Category
     {
         if ($this->movies->removeElement($movie)) {
             $movie->removeCategory($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Serie>
+     */
+    public function getSeries(): Collection
+    {
+        return $this->series;
+    }
+
+    public function addSeries(Serie $series): self
+    {
+        if (!$this->series->contains($series)) {
+            $this->series->add($series);
+            $series->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSeries(Serie $series): self
+    {
+        if ($this->series->removeElement($series)) {
+            $series->removeCategory($this);
         }
 
         return $this;
