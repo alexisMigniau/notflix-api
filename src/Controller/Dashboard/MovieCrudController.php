@@ -20,11 +20,11 @@ class MovieCrudController extends TimestampCrudController
     public function configureFields(string $pageName): iterable
     {
         return array_merge([
-            IdField::new('id')->setFormTypeOption('disabled','disabled'),
-            TextField::new('slug')->onlyWhenUpdating(),
-            TextField::new('name'),
-            AssociationField::new('categories')->autocomplete()->setCrudController(CategoryCrudController::class),
-            TextareaField::new('description')->onlyOnForms(),
+            IdField::new('id')->setFormTypeOption('disabled','disabled')->setColumns(1),
+            TextField::new('slug')->onlyWhenUpdating()->setColumns(3),
+            TextField::new('name')->setColumns(3),
+            AssociationField::new('categories')->autocomplete()->setCrudController(CategoryCrudController::class)->setColumns(7),
+            TextareaField::new('description')->onlyOnForms()->setColumns(12),
             NumberField::new('age_restriction'),
             DateField::new('publication_date')
         ], parent::configureFields($pageName));

@@ -11,9 +11,9 @@ abstract class TimestampCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            FormField::addRow(),
-            DateTimeField::new('createdAt')->hideWhenCreating()->setFormTypeOption('disabled','disabled'),
-            DateTimeField::new('updatedAt')->hideWhenCreating()->setFormTypeOption('disabled','disabled')
+            FormField::addPanel('Date')->renderCollapsed(),
+            DateTimeField::new('createdAt')->hideWhenCreating()->setFormTypeOption('disabled','disabled')->setColumns(3),
+            DateTimeField::new('updatedAt')->hideWhenCreating()->setFormTypeOption('disabled','disabled')->setColumns(3)
         ];
     }
 }
