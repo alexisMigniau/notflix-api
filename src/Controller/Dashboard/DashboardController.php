@@ -4,6 +4,7 @@ namespace App\Controller\Dashboard;
 
 use App\Entity\Category;
 use App\Entity\Movie;
+use App\Entity\Serie;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -30,12 +31,14 @@ class DashboardController extends AbstractDashboardController
         return [ 
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
 
-            MenuItem::section('Users'),
-            MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
-
-            MenuItem::section('Contents'),
-            MenuItem::linkToCrud('Categories', 'fa fa-tag', Category::class),
+            MenuItem::section(),
             MenuItem::linkToCrud('Movies', 'fa fa-film', Movie::class),
+            MenuItem::section(),
+            MenuItem::linkToCrud('Series', 'fa fa-film', Serie::class),
+            MenuItem::section(),
+            MenuItem::linkToCrud('Users', 'fa fa-user', Category::class),
+            MenuItem::section(),
+            MenuItem::linkToCrud('Categories', 'fa fa-tag', Category::class),
         ];
     }
 }
