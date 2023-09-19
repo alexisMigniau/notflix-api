@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Movie;
+use App\Entity\Serie;
 use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -191,6 +192,125 @@ class AppFixtures extends Fixture
 
             $manager->persist($m);
             $movies[$movie['name']] = $m;
+        }
+
+        // Series - Merci chatgpt pour la génération
+        $series_data = [
+            [
+                'name' => "Enquêtes Complexes",
+                'description' => "Une série policière captivante où une équipe d'enquêteurs résout des crimes complexes en ville.",
+                'age_restriction' => 16,
+                'categories' => ['Crime', 'Drame', 'Suspense'],
+            ],
+            [
+                'name' => "Légendes d'Épées",
+                'description' => "Une série d'aventure épique dans un monde fantastique rempli de créatures mythiques et de héros légendaires.",
+                'age_restriction' => 10,
+                'categories' => ['Aventure', 'Fantasy'],
+            ],
+            [
+                'name' => "Opérations Secrètes",
+                'description' => "Une série d'espionnage palpitante où une équipe d'agents spéciaux résout des missions périlleuses à l'échelle mondiale.",
+                'age_restriction' => 14,
+                'categories' => ['Action', 'Espionnage', 'Suspense'],
+            ],
+            [
+                'name' => "Futur Incertain",
+                'description' => "Une série de science-fiction qui explore un futur incertain où la technologie défie l'humanité.",
+                'age_restriction' => 12,
+                'categories' => ['Science-fiction', 'Drame'],
+            ],
+            [
+                'name' => "L'École de Magie",
+                'description' => "Une série fantastique qui suit les aventures de jeunes apprentis sorciers dans une école de magie légendaire.",
+                'age_restriction' => 8,
+                'categories' => ['Fantasy', 'Aventure'],
+            ],
+            [
+                'name' => "Énigmes Historiques",
+                'description' => "Une série historique captivante qui explore des énigmes et des mystères de l'histoire mondiale.",
+                'age_restriction' => 12,
+                'categories' => ['Histoire', 'Drame'],
+            ],
+            [
+                'name' => "Détectives en Herbe",
+                'description' => "Une série pour jeunes détectives en herbe qui résolvent des mystères passionnants dans leur quartier.",
+                'age_restriction' => 10,
+                'categories' => ['Mystère', 'Aventure'],
+            ],
+            [
+                'name' => "Lutte des Royaumes",
+                'description' => "Une série de fantasy qui raconte la lutte pour le pouvoir et la survie entre les royaumes de ce monde fantastique.",
+                'age_restriction' => 12,
+                'categories' => ['Fantasy', 'Action'],
+            ],
+            [
+                'name' => "Révolte des Machines",
+                'description' => "Une série de science-fiction qui plonge dans une révolte inattendue des machines dans un futur proche.",
+                'age_restriction' => 14,
+                'categories' => ['Science-fiction', 'Drame'],
+            ],
+            [
+                'name' => "Explorateurs de l'Infini",
+                'description' => "Une série d'aventure spatiale qui suit l'équipage d'un vaisseau intergalactique dans leur quête pour découvrir de nouveaux mondes.",
+                'age_restriction' => 10,
+                'categories' => ['Science-fiction', 'Aventure'],
+            ],
+            [
+                'name' => "Résistance Héroïque",
+                'description' => "Une série de guerre qui retrace les actes héroïques et la résistance courageuse face à l'oppression.",
+                'age_restriction' => 14,
+                'categories' => ['Guerre', 'Drame'],
+            ],
+            [
+                'name' => "La Vie de Quartier",
+                'description' => "Une série comique qui explore la vie de quartier avec ses personnages colorés et ses situations hilarantes.",
+                'age_restriction' => 10,
+                'categories' => ['Comédie'],
+            ],
+            [
+                'name' => "Mystères Surnaturels",
+                'description' => "Une série surnaturelle qui plonge dans les mystères du paranormal et des phénomènes inexpliqués.",
+                'age_restriction' => 14,
+                'categories' => ['Surnaturel', 'Suspense'],
+            ],
+            [
+                'name' => "Lutte pour la Survie",
+                'description' => "Une série de survie intense où un groupe de personnes lutte pour survivre dans un environnement hostile.",
+                'age_restriction' => 16,
+                'categories' => ['Survie', 'Drame'],
+            ],
+            [
+                'name' => "Secrets de Famille",
+                'description' => "Une série dramatique qui explore les secrets, les conflits et les révélations au sein d'une famille complexe.",
+                'age_restriction' => 16,
+                'categories' => ['Drame'],
+            ]
+        ];
+
+        $series = [];
+
+        foreach($series_data as $serie) {
+            $s = new Serie();
+            $s->setName($serie['name']);
+            $s->setDescription($serie['description']);
+            $s->setAgeRestriction($serie['age_restriction']);
+        
+            foreach($serie['categories'] as $c_label) {
+                if(!isset($categories[$c_label])) {
+                    // Création de la catégorie à la volée
+                    $c = new Category();
+                    $c->setLabel($c_label);
+                    $manager->persist($c);
+
+                    $categories[$c_label] = $c;
+                }
+
+                $s->addCategory($categories[$c_label]);
+            }
+
+            $manager->persist($s);
+            $series[$serie['name']] = $s;
         }
 
         $manager->flush();
