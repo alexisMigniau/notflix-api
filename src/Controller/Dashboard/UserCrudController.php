@@ -3,16 +3,15 @@
 namespace App\Controller\Dashboard;
 
 use App\Entity\User;
-use EasyCorp\Bundle\EasyAdminBundle\Config\{Action, Actions, Crud, KeyValueStore};
+use EasyCorp\Bundle\EasyAdminBundle\Config\{Crud, KeyValueStore};
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
-use EasyCorp\Bundle\EasyAdminBundle\Field\{ChoiceField, DateTimeField, IdField, EmailField, TextField};
+use EasyCorp\Bundle\EasyAdminBundle\Field\{ChoiceField, IdField, EmailField, TextField};
 use Symfony\Component\Form\Extension\Core\Type\{PasswordType};
-use Symfony\Component\Form\{FormBuilderInterface, FormEvent, FormEvents};
+use Symfony\Component\Form\{FormBuilderInterface, FormEvents};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserCrudController extends AbstractCrudController
+class UserCrudController extends TimestampCrudController
 {
     private $userPasswordHasher;
 
@@ -29,8 +28,8 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')->onlyOnIndex(),
+        return array_merge([
+            IdField::new('id')->setFormTypeOption('disabled','disabled'),
             EmailField::new('email'),
             ChoiceField::new('roles')
                 ->allowMultipleChoices()
@@ -44,9 +43,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('plainPassword', 'Password')->setFormType(PasswordType::class)
                 ->setRequired($pageName === Crud::PAGE_NEW)
                 ->onlyOnForms(),
-            DateTimeField::new('createdAt')->onlyOnIndex(),
-            DateTimeField::new('updatedAt')->onlyOnIndex(),
-        ];
+        ], parent::configureFields($pageName));
     }
 
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
