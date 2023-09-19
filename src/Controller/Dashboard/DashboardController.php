@@ -36,7 +36,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::section(),
             MenuItem::linkToCrud('Series', 'fa fa-film', Serie::class),
             MenuItem::section(),
-            MenuItem::linkToCrud('Users', 'fa fa-user', Category::class),
+            MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
             MenuItem::section(),
             MenuItem::linkToCrud('Categories', 'fa fa-tag', Category::class),
         ];
