@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-trait Timestampable {
+trait TimestampableTrait {
 
     use TimestampableEntity;
 

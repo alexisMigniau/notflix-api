@@ -14,7 +14,7 @@ use ApiPlatform\Metadata\Put;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\State\UserPasswordHasher;
-use App\Entity\Trait\Timestampable;
+use App\Entity\Trait\TimestampableTrait;
 use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -29,7 +29,7 @@ use Ramsey\Uuid\Uuid;
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    use Timestampable;
+    use TimestampableTrait;
 
     #[ApiProperty(identifier: false)]
     #[ORM\Id]

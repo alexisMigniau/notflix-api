@@ -5,7 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
-use App\Entity\Trait\Timestampable;
+use App\Entity\Trait\TimestampableTrait;
 use App\Repository\SerieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,7 +21,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 )]
 class Serie
 {
-    use Timestampable;
+    use TimestampableTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
