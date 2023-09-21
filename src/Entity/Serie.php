@@ -5,15 +5,19 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
-use App\Entity\Trait\Timestampable;
+use App\Entity\Trait\TimestampableTrait;
 use App\Repository\SerieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
+#[Vich\Uploadable]
 #[ApiResource(
     operations: [
         new GetCollection()
@@ -21,7 +25,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 )]
 class Serie
 {
-    use Timestampable;
+    use TimestampableTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -45,6 +49,16 @@ class Serie
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'series')]
     private Collection $categories;
+
+    #[Vich\UploadableField(mapping: 'movies_images', fileNameProperty: 'image')]
+    #[Assert\Image(
+        mimeTypes:['image/png'],
+        detectCorrupted:true
+    )]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -129,6 +143,58 @@ class Serie
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image
+     *
+     * @return ?string
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @param ?string $image
+     *
+     * @return self
+     */
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageFile
+     *
+     * @return ?File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @param ?File $imageFile
+     *
+     * @return self
+     */
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }
