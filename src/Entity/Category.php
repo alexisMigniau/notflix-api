@@ -25,10 +25,11 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["movies:collection","series:collection"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups("movies:collection")]
+    #[Groups(["movies:collection","series:collection"])]
     private ?string $label = null;
 
     #[ORM\ManyToMany(targetEntity: Movie::class, mappedBy: 'categories')]

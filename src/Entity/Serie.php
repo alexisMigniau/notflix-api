@@ -15,6 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
 #[Vich\Uploadable]
@@ -22,6 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new GetCollection()
     ],
+    normalizationContext: ['groups' => 'series:collection']
 )]
 class Serie
 {
@@ -36,18 +38,23 @@ class Serie
     #[Gedmo\Slug(fields: ['name'])]
     #[ApiProperty(identifier: true)]
     #[ORM\Column(type : "string", length : 128, unique : true)]
+    #[Groups("series:collection")]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("series:collection")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups("series:collection")]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("series:collection")]
     private ?int $age_restriction = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'series')]
+    #[Groups("series:collection")]
     private Collection $categories;
 
     #[Vich\UploadableField(mapping: 'movies_images', fileNameProperty: 'image')]
@@ -58,6 +65,7 @@ class Serie
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("series:collection")]
     private ?string $image = null;
 
     public function __construct()
