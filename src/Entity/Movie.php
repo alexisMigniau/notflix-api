@@ -16,6 +16,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Context;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 #[Vich\Uploadable]
@@ -23,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new GetCollection()
     ],
+    normalizationContext: ['groups' => 'movies:collection']
 )]
 class Movie
 {
@@ -37,21 +41,28 @@ class Movie
     #[Gedmo\Slug(fields: ['name'])]
     #[ApiProperty(identifier: true)]
     #[ORM\Column(type : "string", length : 128, unique : true)]
+    #[Groups("movies:collection")]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("movies:collection")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups("movies:collection")]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("movies:collection")]
     private ?int $age_restriction = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Context([DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
+    #[Groups("movies:collection")]
     private ?\DateTimeInterface $publication_date = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'movies')]
+    #[Groups("movies:collection")]
     private Collection $categories;
 
     #[Vich\UploadableField(mapping: 'movies_images', fileNameProperty: 'image')]
@@ -62,6 +73,7 @@ class Movie
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("movies:collection")]
     private ?string $image = null;
 
     public function __construct()
