@@ -18,6 +18,10 @@ services:
             context: ./php
             args:
                 TIMEZONE: ${TIMEZONE}
+        environment:
+            XDEBUG_MODE: debug
+            XDEBUG_SESSION: 1
+            XDEBUG_CONFIG: "client_host=localhost"
         volumes:
             - ../:/var/www/symfony:cached
             - notflix_app_var:/var/www/symfony/var
