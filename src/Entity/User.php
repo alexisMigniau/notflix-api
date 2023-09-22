@@ -8,9 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\GetMeController;
+use App\Controller\UpdateMeController;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\State\UserPasswordHasher;
@@ -23,8 +26,18 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ApiResource(
     operations: [
         new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user:create']],  uriTemplate: 'register'),
-        new Get(),
-        new Put(processor: UserPasswordHasher::class),
+        new Get(
+            name: 'current_user_get',
+            uriTemplate: '/user/me',
+            controller: GetMeController::class,
+            read:false
+        ),
+        new Put(
+            name: 'current_user_put',
+            uriTemplate: '/user/me',
+            controller: UpdateMeController::class,
+            processor: UserPasswordHasher::class
+        ),
     ],
     normalizationContext: ['groups' => ['user:item', 'timestampable']],
     denormalizationContext: ['groups' => ['user:create', 'user:update']],
