@@ -16,8 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\State\UserPasswordHasher;
 use App\Entity\Trait\TimestampableTrait;
 use Ramsey\Uuid\Uuid;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity('email')]
 #[ApiResource(
     operations: [
         new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user:create']],  uriTemplate: 'register'),
@@ -58,6 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[Assert\NotBlank(groups: ['user:create'])]
+    #[Assert\Length(min:6)]
     #[Groups(['user:create', 'user:update'])]
     private ?string $plainPassword = null;
 
