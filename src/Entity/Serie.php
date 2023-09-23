@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
 #[Vich\Uploadable]
@@ -55,6 +57,7 @@ class Serie
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'series')]
     #[Groups("series:collection")]
+    #[ApiFilter(SearchFilter::class, properties: ['categories.id' => 'exact'])]
     private Collection $categories;
 
     #[Vich\UploadableField(mapping: 'movies_images', fileNameProperty: 'image')]
