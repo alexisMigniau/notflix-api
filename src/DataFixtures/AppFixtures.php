@@ -360,6 +360,10 @@ class AppFixtures extends Fixture
             $s->setName($serie['name']);
             $s->setDescription($serie['description']);
             $s->setAgeRestriction($serie['age_restriction']);
+
+            if(isset($serie['image'])) {
+                $s->setImage($serie['image']); 
+            }
         
             foreach($serie['categories'] as $c_label) {
                 if(!isset($categories[$c_label])) {
