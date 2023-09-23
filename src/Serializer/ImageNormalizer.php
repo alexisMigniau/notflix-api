@@ -26,7 +26,11 @@ final class ImageNormalizer implements NormalizerInterface, NormalizerAwareInter
     public function normalize($object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $context[self::ALREADY_CALLED] = true;
-        $object->setImage($this->baseUrl . $this->storage->resolveUri($object, 'imageFile'));
+
+        if(!empty($object->getImage()) && !str_starts_with($object->getImage(), 'http')) {
+            $object->setImage($this->baseUrl . $this->storage->resolveUri($object, 'imageFile'));
+        }
+
         return $this->normalizer->normalize($object, $format, $context);
     }
 
@@ -35,6 +39,7 @@ final class ImageNormalizer implements NormalizerInterface, NormalizerAwareInter
         if (isset($context[self::ALREADY_CALLED])) {
             return false;
         }
-        return $data instanceof Movie || $data instanceof Serie;
+        
+        return ($data instanceof Movie || $data instanceof Serie) ;
     }
 }
