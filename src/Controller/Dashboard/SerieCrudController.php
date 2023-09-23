@@ -27,6 +27,7 @@ class SerieCrudController extends TimestampCrudController
             AssociationField::new('categories')->autocomplete()->setCrudController(CategoryCrudController::class)->setColumns(7),
             TextareaField::new('description')->onlyOnForms()->setColumns(12),
             TextField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms(),
+            TextField::new('image')->setLabel('Image URL')->onlyOnForms(),
             ImageField::new('image')->setBasePath('/uploads/movies/images')->onlyOnIndex(),
             NumberField::new('age_restriction'),
         ], parent::configureFields($pageName));
