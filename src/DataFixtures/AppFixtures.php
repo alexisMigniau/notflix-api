@@ -48,123 +48,130 @@ class AppFixtures extends Fixture
         // Movies - Merci chatgpt pour la génération
         $movies_data = [
             [
-                'name' => "Les Secrets de l'Univers",
-                'description' => "Un film captivant qui explore les mystères de l'espace et de la cosmologie.",
-                'publication_date' => '15-01-2023',
+                'name' => "Inception",
+                'description' => "Dom Cobb est un voleur expérimenté qui vole les secrets les plus intimes enfouis dans l'esprit des gens pendant qu'ils rêvent.",
+                'publication_date' => "22-07-2010",
                 'age_restriction' => 12,
-                'categories' => ['Science-fiction', 'Documentaire', 'Aventure']
+                'categories' => ["Sci-Fi", "Action", "Thriller"]
             ],
             [
-                'name' => "Le Mystère du Manoir Hanté",
-                'description' => "Un film d'horreur palpitant mettant en scène des phénomènes paranormaux dans un vieux manoir isolé.",
-                'publication_date' => '22-03-2023',
+                'name' => "Les Évadés",
+                'description' => "Deux prisonniers, Andy Dufresne et Ellis Redding, développent une amitié profonde alors qu'ils passent des années derrière les barreaux à Shawshank.",
+                'publication_date' => "20-10-1995",
+                'age_restriction' => 16,
+                'categories' => ["Drame", "Crime"]
+            ],
+            [
+                'name' => "Le Parrain",
+                'description' => "L'histoire épique de la famille mafieuse Corleone et de son patriarche, Don Vito Corleone, qui tente de léguer son empire à son fils, Michael.",
+                'publication_date' => "26-09-1972",
                 'age_restriction' => 18,
-                'categories' => ['Horreur', 'Suspense']
+                'categories' => ["Drame", "Crime"]
             ],
             [
-                'name' => "L'Évasion de l'Île Maudite",
-                'description' => "Un thriller palpitant où un groupe de naufragés doit trouver un moyen de quitter une île dangereuse.",
-                'publication_date' => '10-05-2023',
-                'age_restriction' => 14,
-                'categories' => ['Action', 'Aventure', 'Suspense']
-            ],
-            [
-                'name' => "La Quête du Trésor Perdu",
-                'description' => "Un film d'aventure palpitant où des explorateurs partent à la recherche d'un trésor légendaire.",
-                'publication_date' => '28-06-2023',
-                'age_restriction' => 10,
-                'categories' => ['Aventure']
-            ],
-            [
-                'name' => "Complot Politique",
-                'description' => "Un thriller politique où un journaliste découvre un complot dangereux au plus haut niveau du gouvernement.",
-                'publication_date' => '17-08-2023',
-                'age_restriction' => 16,
-                'categories' => ['Suspense', 'Drame']
-            ],
-            [
-                'name' => "Le Retour des Dinosaures",
-                'description' => "Un film de science-fiction où des dinosaures reviennent à la vie et menacent l'humanité.",
-                'publication_date' => '05-11-2023',
-                'age_restriction' => 12,
-                'categories' => ['Science-fiction', 'Action']
-            ],
-            [
-                'name' => "L'Énigme du Sphinx",
-                'description' => "Un mystère historique où un archéologue tente de résoudre les secrets du Sphinx en Égypte ancienne.",
-                'publication_date' => '12-02-2023',
-                'age_restriction' => 14,
-                'categories' => ['Mystère', 'Aventure']
-            ],
-            [
-                'name' => "Chasse à l'Homme",
-                'description' => "Un thriller haletant où un fugitif traqué par la police tente de prouver son innocence.",
-                'publication_date' => '30-04-2023',
-                'age_restriction' => 16,
-                'categories' => ['Action', 'Suspense']
-            ],
-            [
-                'name' => "Le Secret du Monde Sous-Marin",
-                'description' => "Un documentaire fascinant qui explore les profondeurs des océans et la vie marine.",
-                'publication_date' => '08-07-2023',
-                'age_restriction' => 8,
-                'categories' => ['Documentaire']
-            ],
-            [
-                'name' => "L'Évasion de la Prison",
-                'description' => "Un film de prison tendu où un groupe de détenus planifie une évasion audacieuse.",
-                'publication_date' => '19-09-2023',
-                'age_restriction' => 16,
-                'categories' => ['Action', 'Suspense']
-            ],
-            [
-                'name' => "Odyssée dans l'Espace",
-                'description' => "Un voyage épique à travers le cosmos à la découverte de nouvelles frontières de l'humanité.",
-                'publication_date' => '21-10-2023',
-                'age_restriction' => 10,
-                'categories' => ['Science-fiction', 'Aventure']
-            ],
-            [
-                'name' => "Le Dernier Survivant",
-                'description' => "Un film post-apocalyptique où un homme lutte pour sa survie dans un monde dévasté par une pandémie.",
-                'publication_date' => '14-12-2023',
+                'name' => "Pulp Fiction",
+                'description' => "Les histoires entremêlées de gangsters, de boxeurs, de tueurs à gages et d'autres personnages sombres à Los Angeles.",
+                'publication_date' => "14-10-1994",
                 'age_restriction' => 18,
-                'categories' => ['Science-fiction', 'Drame', 'Action']
+                'categories' => ["Crime", "Drame"]
             ],
             [
-                'name' => "L'Art du Cambriolage",
-                'description' => "Un film de braquage sophistiqué où une équipe de voleurs tente de voler une collection d'œuvres d'art précieuses.",
-                'publication_date' => '09-02-2023',
-                'age_restriction' => 14,
-                'categories' => ['Suspense', 'Action']
-            ],
-            [
-                'name' => "L'Explorateur Solitaire",
-                'description' => "Un aventurier solitaire se lance dans une expédition périlleuse à travers les jungles inexplorées.",
-                'publication_date' => '27-06-2023',
+                'name' => "The Dark Knight",
+                'description' => "Batman affronte le Joker, un criminel psychotique, tandis que Gotham City sombre dans le chaos.",
+                'publication_date' => "18-07-2008",
                 'age_restriction' => 12,
-                'categories' => ['Aventure']
+                'categories' => ["Action", "Crime", "Thriller"]
             ],
             [
-                'name' => "Le Fantôme de la Forêt",
-                'description' => "Un film d'horreur où un groupe de campeurs est traqué par une entité maléfique dans une forêt isolée.",
-                'publication_date' => '03-04-2023',
-                'age_restriction' => 16,
-                'categories' => ['Horreur', 'Suspense']
-            ],
-            [
-                'name' => "L'Intrigue Politique",
-                'description' => "Un drame politique complexe où les jeux de pouvoir et de manipulation sont à leur comble.",
-                'publication_date' => '19-11-2023',
-                'age_restriction' => 16,
-                'categories' => ['Drame', 'Suspense']
-            ],
-            [
-                'name' => "La Planète Perdue",
-                'description' => "Un film de science-fiction où une expédition spatiale découvre une planète étrange et hostile.",
-                'publication_date' => '10-09-2023',
+                'name' => "Interstellar",
+                'description' => "Un groupe d'explorateurs entreprend un voyage interstellaire pour trouver une nouvelle planète habitable pour l'humanité.",
+                'publication_date' => "05-11-2014",
                 'age_restriction' => 12,
-                'categories' => ['Science-fiction', 'Aventure']
+                'categories' => ["Sci-Fi", "Drame"]
+            ],
+            [
+                'name' => "La La Land",
+                'description' => "L'histoire d'amour entre un pianiste de jazz passionné et une actrice débutante à Los Angeles.",
+                'publication_date' => "25-12-2016",
+                'age_restriction' => 0,
+                'categories' => ["Comédie musicale", "Drame", "Romance"]
+            ],
+            [
+                'name' => "Le Seigneur des Anneaux",
+                'description' => "Un groupe de neuf compagnons se lance dans une quête pour détruire un anneau magique maléfique et sauver la Terre du Milieu.",
+                'publication_date' => "19-12-2001",
+                'age_restriction' => 12,
+                'categories' => ["Fantasy", "Aventure"]
+            ],
+            [
+                'name' => "Forrest Gump",
+                'description' => "L'histoire de Forrest Gump, un homme simple d'esprit qui se retrouve impliqué dans des événements marquants de l'histoire américaine.",
+                'publication_date' => "05-10-1994",
+                'age_restriction' => 12,
+                'categories' => ["Drame", "Romance"]
+            ],
+            [
+                'name' => "Avatar",
+                'description' => "Un ancien marine paraplégique est envoyé sur la planète Pandora, où il devient impliqué dans un conflit entre les habitants locaux et les colons humains.",
+                'publication_date' => "16-12-2009",
+                'age_restriction' => 12,
+                'categories' => ["Sci-Fi", "Action", "Aventure"]
+            ],
+            [
+                'name' => "Le Roi Lion",
+                'description' => "Simba, un jeune lionceau, doit affronter son destin et reprendre sa place légitime en tant que roi de la Terre des Lions.",
+                'publication_date' => "15-06-1994",
+                'age_restriction' => 0,
+                'categories' => ["Animation", "Aventure", "Famille"]
+            ],
+            [
+                'name' => "Gladiator",
+                'description' => "Le général romain Maximus est trahi et forcé de devenir un gladiateur, cherchant à se venger de l'empereur qui a assassiné sa famille.",
+                'publication_date' => "05-05-2000",
+                'age_restriction' => 16,
+                'categories' => ["Action", "Drame"]
+            ],
+            [
+                'name' => "Le Loup de Wall Street",
+                'description' => "L'histoire vraie de Jordan Belfort, un courtier en bourse qui devient impliqué dans la fraude massive à Wall Street dans les années 90.",
+                'publication_date' => "25-12-2013",
+                'age_restriction' => 18,
+                'categories' => ["Biographie", "Comédie", "Crime"]
+            ],
+            [
+                'name' => "Avengers: Endgame",
+                'description' => "Les super-héros de l'univers Marvel s'unissent pour affronter Thanos et tenter de restaurer l'équilibre de l'univers après le claquement de doigts.",
+                'publication_date' => "24-04-2019",
+                'age_restriction' => 12,
+                'categories' => ["Action", "Aventure", "Fantasy"]
+            ],
+            [
+                'name' => "Inglourious Basterds",
+                'description' => "Pendant la Seconde Guerre mondiale, un groupe de soldats juifs américains est chargé de semer la terreur parmi les troupes allemandes.",
+                'publication_date' => "20-08-2009",
+                'age_restriction' => 16,
+                'categories' => ["Guerre", "Drame"]
+            ],
+            [
+                'name' => "Le Cinquième Élément",
+                'description' => "Dans un futur lointain, un chauffeur de taxi et une jeune femme mystérieuse sont les clés pour sauver la Terre d'une menace imminente.",
+                'publication_date' => "07-05-1997",
+                'age_restriction' => 12,
+                'categories' => ["Sci-Fi", "Action"]
+            ],
+            [
+                'name' => "Fight Club",
+                'description' => "Un homme sans nom et un vendeur de savon créent un club secret où les hommes peuvent se battre pour se sentir vivants.",
+                'publication_date' => "15-10-1999",
+                'age_restriction' => 18,
+                'categories' => ["Drame", "Thriller"]
+            ],
+            [
+                'name' => "Les Indestructibles",
+                'description' => "Une famille de super-héros retirés est forcée de reprendre du service pour sauver le monde d'un nouveau méchant redoutable.",
+                'publication_date' => "05-11-2004",
+                'age_restriction' => 0,
+                'categories' => ["Animation", "Action", "Aventure"]
             ]
         ];
 
@@ -197,94 +204,112 @@ class AppFixtures extends Fixture
         // Series - Merci chatgpt pour la génération
         $series_data = [
             [
-                'name' => "Enquêtes Complexes",
-                'description' => "Une série policière captivante où une équipe d'enquêteurs résout des crimes complexes en ville.",
-                'age_restriction' => 16,
-                'categories' => ['Crime', 'Drame', 'Suspense'],
+                'name' => "Breaking Bad",
+                'description' => "Un professeur de chimie se tourne vers la fabrication de méthamphétamine pour subvenir aux besoins de sa famille après un diagnostic de cancer.",
+                'age_restriction' => 18,
+                'categories' => ["Drame", "Crime", "Thriller"]
             ],
             [
-                'name' => "Légendes d'Épées",
-                'description' => "Une série d'aventure épique dans un monde fantastique rempli de créatures mythiques et de héros légendaires.",
-                'age_restriction' => 10,
-                'categories' => ['Aventure', 'Fantasy'],
+                'name' => "Game of Thrones",
+                'description' => "Dans un royaume fictif, des familles nobles luttent pour le contrôle du Trône de Fer et du royaume des Sept Couronnes.",
+                'age_restriction' => 18,
+                'categories' => ["Fantasy", "Drame", "Aventure"]
             ],
             [
-                'name' => "Opérations Secrètes",
-                'description' => "Une série d'espionnage palpitante où une équipe d'agents spéciaux résout des missions périlleuses à l'échelle mondiale.",
-                'age_restriction' => 14,
-                'categories' => ['Action', 'Espionnage', 'Suspense'],
-            ],
-            [
-                'name' => "Futur Incertain",
-                'description' => "Une série de science-fiction qui explore un futur incertain où la technologie défie l'humanité.",
+                'name' => "Stranger Things",
+                'description' => "À Hawkins, dans l'Indiana, un groupe d'enfants se heurte à des phénomènes surnaturels et à un laboratoire secret.",
                 'age_restriction' => 12,
-                'categories' => ['Science-fiction', 'Drame'],
+                'categories' => ["Sci-Fi", "Horreur", "Drame"]
             ],
             [
-                'name' => "L'École de Magie",
-                'description' => "Une série fantastique qui suit les aventures de jeunes apprentis sorciers dans une école de magie légendaire.",
-                'age_restriction' => 8,
-                'categories' => ['Fantasy', 'Aventure'],
-            ],
-            [
-                'name' => "Énigmes Historiques",
-                'description' => "Une série historique captivante qui explore des énigmes et des mystères de l'histoire mondiale.",
-                'age_restriction' => 12,
-                'categories' => ['Histoire', 'Drame'],
-            ],
-            [
-                'name' => "Détectives en Herbe",
-                'description' => "Une série pour jeunes détectives en herbe qui résolvent des mystères passionnants dans leur quartier.",
-                'age_restriction' => 10,
-                'categories' => ['Mystère', 'Aventure'],
-            ],
-            [
-                'name' => "Lutte des Royaumes",
-                'description' => "Une série de fantasy qui raconte la lutte pour le pouvoir et la survie entre les royaumes de ce monde fantastique.",
-                'age_restriction' => 12,
-                'categories' => ['Fantasy', 'Action'],
-            ],
-            [
-                'name' => "Révolte des Machines",
-                'description' => "Une série de science-fiction qui plonge dans une révolte inattendue des machines dans un futur proche.",
-                'age_restriction' => 14,
-                'categories' => ['Science-fiction', 'Drame'],
-            ],
-            [
-                'name' => "Explorateurs de l'Infini",
-                'description' => "Une série d'aventure spatiale qui suit l'équipage d'un vaisseau intergalactique dans leur quête pour découvrir de nouveaux mondes.",
-                'age_restriction' => 10,
-                'categories' => ['Science-fiction', 'Aventure'],
-            ],
-            [
-                'name' => "Résistance Héroïque",
-                'description' => "Une série de guerre qui retrace les actes héroïques et la résistance courageuse face à l'oppression.",
-                'age_restriction' => 14,
-                'categories' => ['Guerre', 'Drame'],
-            ],
-            [
-                'name' => "La Vie de Quartier",
-                'description' => "Une série comique qui explore la vie de quartier avec ses personnages colorés et ses situations hilarantes.",
-                'age_restriction' => 10,
-                'categories' => ['Comédie'],
-            ],
-            [
-                'name' => "Mystères Surnaturels",
-                'description' => "Une série surnaturelle qui plonge dans les mystères du paranormal et des phénomènes inexpliqués.",
-                'age_restriction' => 14,
-                'categories' => ['Surnaturel', 'Suspense'],
-            ],
-            [
-                'name' => "Lutte pour la Survie",
-                'description' => "Une série de survie intense où un groupe de personnes lutte pour survivre dans un environnement hostile.",
+                'name' => "Sherlock",
+                'description' => "Le célèbre détective Sherlock Holmes résout des crimes complexes à Londres avec l'aide de son ami, le Dr. John Watson.",
                 'age_restriction' => 16,
-                'categories' => ['Survie', 'Drame'],
+                'categories' => ["Drame", "Mystère", "Crime"]
             ],
             [
-                'name' => "Secrets de Famille",
-                'description' => "Une série dramatique qui explore les secrets, les conflits et les révélations au sein d'une famille complexe.",
+                'name' => "Friends",
+                'description' => "Un groupe d'amis vit ensemble à New York et partage les joies et les défis de la vie quotidienne.",
+                'age_restriction' => 0,
+                'categories' => ["Comédie", "Romance"]
+            ],
+            [
+                'name' => "The Office",
+                'description' => "Une série de style documentaire qui suit le quotidien hilarant des employés d'un bureau à Scranton, en Pennsylvanie.",
+                'age_restriction' => 12,
+                'categories' => ["Comédie"]
+            ],
+            [
+                'name' => "Black Mirror",
+                'description' => "Une anthologie de contes de science-fiction sombres explorant les implications de la technologie moderne sur la société.",
                 'age_restriction' => 16,
-                'categories' => ['Drame'],
+                'categories' => ["Sci-Fi", "Drame", "Thriller"]
+            ],
+            [
+                'name' => "The Crown",
+                'description' => "L'histoire de la reine Elizabeth II et des événements qui ont façonné la seconde moitié du 20e siècle.",
+                'age_restriction' => 12,
+                'categories' => ["Drame", "Biographie", "Histoire"]
+            ],
+            [
+                'name' => "Narcos",
+                'description' => "L'histoire des cartels de drogue colombiens et de l'effort pour les arrêter mené par les forces de l'ordre et la DEA.",
+                'age_restriction' => 18,
+                'categories' => ["Drame", "Crime"]
+            ],
+            [
+                'name' => "Westworld",
+                'description' => "Un parc d'attractions futuriste permet aux visiteurs d'interagir avec des hôtes robotiques, mais tout ne se passe pas comme prévu.",
+                'age_restriction' => 16,
+                'categories' => ["Sci-Fi", "Drame", "Western"]
+            ],
+            [
+                'name' => "The Witcher",
+                'description' => "Geralt de Riv, un chasseur de monstres surnaturels, navigue dans un monde dangereux et magique rempli de créatures maléfiques.",
+                'age_restriction' => 16,
+                'categories' => ["Fantasy", "Drame", "Action"]
+            ],
+            [
+                'name' => "Peaky Blinders",
+                'description' => "La famille Shelby dirige un gang criminel à Birmingham après la Première Guerre mondiale, cherchant à étendre leur empire.",
+                'age_restriction' => 18,
+                'categories' => ["Drame", "Crime"]
+            ],
+            [
+                'name' => "Vikings",
+                'description' => "L'histoire des guerriers Vikings légendaires et de leurs conquêtes à travers l'Europe et au-delà.",
+                'age_restriction' => 16,
+                'categories' => ["Action", "Drame", "Histoire"]
+            ],
+            [
+                'name' => "Fargo",
+                'description' => "Une anthologie noire avec des histoires indépendantes mettant en vedette des personnages uniques et des situations violentes.",
+                'age_restriction' => 16,
+                'categories' => ["Crime", "Drame", "Thriller"]
+            ],
+            [
+                'name' => "Bojack Horseman",
+                'description' => "Bojack Horseman, une ancienne star de sitcom, tente de trouver la rédemption dans une version anthropomorphisée de Hollywood.",
+                'age_restriction' => 16,
+                'categories' => ["Animation", "Comédie", "Drame"]
+            ],
+            [
+                'name' => "The Mandalorian",
+                'description' => "Un chasseur de primes mandalorien navigue à travers la galaxie Star Wars, loin de l'autorité de la Nouvelle République.",
+                'age_restriction' => 12,
+                'categories' => ["Sci-Fi", "Action"]
+            ],
+            [
+                'name' => "Money Heist",
+                'description' => "Un groupe de criminels talentueux planifie et exécute des braquages spectaculaires sous la direction du mystérieux Professeur.",
+                'age_restriction' => 16,
+                'categories' => ["Drame", "Crime", "Thriller"]
+            ],
+            [
+                'name' => "The Boys",
+                'description' => "Un groupe de justiciers lutte contre des super-héros corrompus qui abusent de leur pouvoir et de leur statut de célébrité.",
+                'age_restriction' => 18,
+                'categories' => ["Action", "Comédie", "Drame"]
             ]
         ];
 
