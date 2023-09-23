@@ -183,6 +183,10 @@ class AppFixtures extends Fixture
             $m->setDescription($movie['description']);
             $m->setAgeRestriction($movie['age_restriction']);
             $m->setPublicationDate(DateTimeImmutable::createFromFormat('j-m-Y', $movie['publication_date']));
+
+            if(isset($movie['image'])) {
+               $m->setImage($movie['image']); 
+            }
         
             foreach($movie['categories'] as $c_label) {
                 if(!isset($categories[$c_label])) {
