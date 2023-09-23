@@ -20,7 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Doctrine\Orm\Filter\{DateFilter, SearchFilter, OrderFilter};
+use ApiPlatform\Doctrine\Orm\Filter\{SearchFilter, OrderFilter};
+use App\Filter\PubliedFilter;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 #[Vich\Uploadable]
@@ -61,7 +62,7 @@ class Movie
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Context([DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
     #[Groups("movies:collection")]
-    #[ApiFilter(DateFilter::class)]
+    #[ApiFilter(PubliedFilter::class)]
     #[ApiFilter(OrderFilter::class, properties: ['publication_date' => 'DESC'])]
     private ?\DateTimeInterface $publication_date = null;
 
