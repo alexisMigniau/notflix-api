@@ -3,3 +3,34 @@
 {% block content_title %}
 Notflix - Dashboard
 {% endblock %}
+
+{% block head_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('app.css', ea.assets.defaultAssetPackageName) }}">
+    <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+    <script src="{{ asset('js/homepage.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="card-container">
+    <a href="{{ user_link }}" class="card-stat user">
+        <h2 class="stat-label">Users</h2>
+        <i class="fa-solid fa-user stat-icon"></i>
+        <h2 class="stat-number" value="{{ user_count }}">0</h2>
+    </a>
+    <a href="{{ movie_link }}" class="card-stat movies">
+        <h2 class="stat-label">Movies</h2>
+        <i class="fa-solid fa-film stat-icon"></i>
+        <h2 class="stat-number" value="{{ movie_count }}">0</h2>
+    </a>
+    <a href="{{ category_link }}" class="card-stat categories">
+        <h2 class="stat-label">Categories</h2>
+        <i class="fa-solid fa-tag stat-icon"></i>
+        <h2 class="stat-number" value="{{ category_count }}">0</h2>
+    </a>
+    <a href="{{ serie_link }}" class="card-stat series">
+        <h2 class="stat-label">Series</h2>
+        <i class="fa-solid fa-film stat-icon"></i>
+        <h2 class="stat-number" value="{{ serie_count }}">0</h2>
+    </a>
+</div>
+{% endblock %}
