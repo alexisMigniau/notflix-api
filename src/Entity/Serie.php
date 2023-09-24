@@ -71,9 +71,13 @@ class Serie
     #[Groups("series:collection")]
     private ?string $image = null;
 
+    #[ORM\OneToMany(mappedBy: 'Serie', targetEntity: Season::class, orphanRemoval: true)]
+    private Collection $seasons;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->seasons = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -205,6 +209,36 @@ class Serie
 
         if (null !== $imageFile) {
             $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Season>
+     */
+    public function getSeasons(): Collection
+    {
+        return $this->seasons;
+    }
+
+    public function addSeason(Season $season): static
+    {
+        if (!$this->seasons->contains($season)) {
+            $this->seasons->add($season);
+            $season->setSerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSeason(Season $season): static
+    {
+        if ($this->seasons->removeElement($season)) {
+            // set the owning side to null (unless already changed)
+            if ($season->getSerie() === $this) {
+                $season->setSerie(null);
+            }
         }
 
         return $this;
