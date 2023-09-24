@@ -18,6 +18,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use DateTime;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
 #[Vich\Uploadable]
@@ -71,7 +73,7 @@ class Serie
     #[Groups("series:collection")]
     private ?string $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'Serie', targetEntity: Season::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'serie', targetEntity: Season::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $seasons;
 
     public function __construct()
@@ -242,5 +244,17 @@ class Serie
         }
 
         return $this;
+    }
+
+    public function getSeasonCount(): int {
+        return $this->seasons->count();
+    }
+
+    #[Groups("series:collection")]
+    #[SerializedName("season_count")]
+    public function getSeasonAccessibleCount(): int {
+        return $this->seasons->filter(function(Season $season) {
+            return $season->getPublicationDate() <= new DateTime();
+        })->count();
     }
 }

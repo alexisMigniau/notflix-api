@@ -2,8 +2,12 @@
 
 namespace App\Controller\Dashboard;
 
+use App\Entity\Season;
 use App\Entity\Serie;
+use DateTime;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -21,6 +25,7 @@ class SerieCrudController extends TimestampCrudController
     public function configureFields(string $pageName): iterable
     {
         return array_merge([
+            FormField::addTab('Series informations'),
             IdField::new('id')->setFormTypeOption('disabled','disabled')->setColumns(1),
             TextField::new('slug')->onlyWhenUpdating()->setColumns(3),
             TextField::new('name')->setColumns(3),
@@ -30,6 +35,10 @@ class SerieCrudController extends TimestampCrudController
             TextField::new('image')->setLabel('Image URL')->onlyOnForms(),
             ImageField::new('image')->setBasePath('/uploads/movies/images')->onlyOnIndex(),
             NumberField::new('age_restriction'),
-        ], parent::configureFields($pageName));
+            NumberField::new('seasonCount')->setLabel('Number of seasons')->onlyOnIndex()
+        ], parent::configureFields($pageName), [
+            FormField::addTab('Seasons'),
+            CollectionField::new('seasons')->renderExpanded()->useEntryCrudForm()->onlyOnForms()
+        ]);
     }
 }
