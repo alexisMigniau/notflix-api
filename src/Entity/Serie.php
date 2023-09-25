@@ -20,6 +20,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use DateTime;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use App\Filter\PubliedFilter;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
 #[Vich\Uploadable]
@@ -29,6 +30,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
     ],
     normalizationContext: ['groups' => 'series:collection']
 )]
+#[ApiFilter(PubliedFilter::class, properties: ['publied'])]
 class Serie
 {
     use TimestampableTrait;
