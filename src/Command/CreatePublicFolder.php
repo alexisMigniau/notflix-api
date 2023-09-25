@@ -35,7 +35,7 @@ class CreatePublicFolder extends Command
         foreach($folders as $f) {
             $path = 'public' . $this->params->get($f);
 
-            if($filesystem->exists($path)) {
+            if(!$filesystem->exists($path)) {
                 $filesystem->mkdir($path);
             }
 
