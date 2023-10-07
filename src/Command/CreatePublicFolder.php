@@ -30,6 +30,7 @@ class CreatePublicFolder extends Command
         $folders = [
             'path_movies_images',
             'path_series_images',
+            'path_episodes_images',
         ];
 
         foreach($folders as $f) {

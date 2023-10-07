@@ -6,6 +6,7 @@
 parameters:
     path_movies_images: /uploads/movies/images
     path_series_images: /uploads/series/images
+    path_episodes_images: /uploads/episodes/images
 services:
     # default configuration for services in *this* file
     _defaults:
