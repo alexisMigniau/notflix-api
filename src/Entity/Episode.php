@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: EpisodeRepository::class)]
-#[ApiResource]
+#[Vich\Uploadable]
 class Episode
 {
     use TimestampableTrait;
@@ -86,6 +86,58 @@ class Episode
     public function setSeason(?Season $season): static
     {
         $this->season = $season;
+
+        return $this;
+    }
+
+     /**
+     * Get the value of image
+     *
+     * @return ?string
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @param ?string $image
+     *
+     * @return self
+     */
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageFile
+     *
+     * @return ?File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @param ?File $imageFile
+     *
+     * @return self
+     */
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }

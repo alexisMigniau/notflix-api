@@ -252,11 +252,29 @@ class Serie
         return $this->seasons->count();
     }
 
+    public function getEpisodeCount(): int {
+        return $this->seasons->reduce(function(int $acc, Season $season ) {
+            return $acc + $season->countEpisodes();
+        }, 0);
+    }
+
     #[Groups("series:collection")]
     #[SerializedName("season_count")]
     public function getSeasonAccessibleCount(): int {
         return $this->seasons->filter(function(Season $season) {
             return $season->getPublicationDate() <= new DateTime();
         })->count();
+    }
+
+    #[Groups("series:collection")]
+    #[SerializedName("episode_count")]
+    public function getEpisodeAccessibleCount(): int {
+        return $this->seasons->reduce(function(int $acc, Season $season) {
+            if($season->getPublicationDate() <= new DateTime()) {
+                $acc += $season->countEpisodes(); 
+            }
+
+            return $acc;
+        }, 0);
     }
 }

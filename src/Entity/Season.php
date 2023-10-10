@@ -33,7 +33,7 @@ class Season
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $episodes;
 
     public function __construct()
@@ -96,6 +96,10 @@ class Season
     public function getEpisodes(): Collection
     {
         return $this->episodes;
+    }
+
+    public function countEpisodes(): int {
+        return count($this->episodes);
     }
 
     public function addEpisode(Episode $episode): static
