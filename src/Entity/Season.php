@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\SeasonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,12 +10,18 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Trait\TimestampableTrait;
 use DateTime;
+use ApiPlatform\Metadata\Get;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: SeasonRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(normalizationContext: ['groups' => ['seasons:item']])
+    ]
+)]
 class Season
 {
     use TimestampableTrait;
@@ -22,12 +29,12 @@ class Season
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups("series:item")]
+    #[Groups(["series:item", "seasons:item"])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Context([DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
-    #[Groups("series:item")]
+    #[Groups(["series:item", "seasons:item"])]
     private ?\DateTimeInterface $publication_date = null;
 
     #[ORM\ManyToOne(targetEntity: Serie::class, inversedBy: 'seasons', cascade: ['persist'])]
@@ -35,10 +42,11 @@ class Season
     private ?Serie $serie = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups("series:item")]
+    #[Groups(["series:item", "seasons:item"])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class, orphanRemoval: true, cascade: ['persist'])]
+    #[Groups("seasons:item")]
     private Collection $episodes;
 
     public function __construct()

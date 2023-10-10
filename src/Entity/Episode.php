@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
-use ApiPlatform\Metadata\ApiResource;
 use App\Repository\EpisodeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Trait\TimestampableTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -22,17 +22,21 @@ class Episode
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("seasons:item")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("seasons:item")]
     private ?string $name = null;
 
     #[Gedmo\Slug(fields: ['name'])]
     #[ApiProperty(identifier: true)]
     #[ORM\Column(type : "string", length : 128, unique : true)]
+    #[Groups("seasons:item")]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups("seasons:item")]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'episodes')]
@@ -47,6 +51,7 @@ class Episode
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("seasons:item")]
     private ?string $image = null;
 
     public function getId(): ?int
@@ -62,6 +67,18 @@ class Episode
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
