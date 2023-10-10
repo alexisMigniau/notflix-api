@@ -9,8 +9,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Trait\TimestampableTrait;
 use DateTime;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: SeasonRepository::class)]
 class Season
@@ -20,10 +22,12 @@ class Season
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("series:item")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Context([DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
+    #[Groups("series:item")]
     private ?\DateTimeInterface $publication_date = null;
 
     #[ORM\ManyToOne(targetEntity: Serie::class, inversedBy: 'seasons', cascade: ['persist'])]
@@ -31,6 +35,7 @@ class Season
     private ?Serie $serie = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("series:item")]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class, orphanRemoval: true, cascade: ['persist'])]
@@ -98,7 +103,9 @@ class Season
         return $this->episodes;
     }
 
-    public function countEpisodes(): int {
+    #[Groups("series:item")]
+    #[SerializedName("episode_count")]
+    public function getEpisodesCount(): int {
         return count($this->episodes);
     }
 
