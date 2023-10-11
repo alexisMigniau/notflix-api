@@ -82,6 +82,15 @@ class Movie
     #[Groups("movies:collection")]
     private ?string $image = null;
 
+    #[Vich\UploadableField(mapping: 'movies_videos', fileNameProperty: 'video')]
+    #[Assert\File(
+        mimeTypes:['video/*']
+    )]
+    private ?File $videoFile = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $video = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -240,6 +249,58 @@ class Movie
         $this->imageFile = $imageFile;
 
         if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of video
+     *
+     * @return ?string
+     */
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    /**
+     * Set the value of video
+     *
+     * @param ?string $video
+     *
+     * @return self
+     */
+    public function setVideo(?string $video): self
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of videoFile
+     *
+     * @return ?File
+     */
+    public function getVideoFile(): ?File
+    {
+        return $this->videoFile;
+    }
+
+    /**
+     * Set the value of videoFile
+     *
+     * @param ?File $videoFile
+     *
+     * @return self
+     */
+    public function setVideoFile(?File $videoFile = null): self
+    {
+        $this->videoFile = $videoFile;
+
+        if (null !== $videoFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 

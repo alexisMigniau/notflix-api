@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class MovieCrudController extends TimestampCrudController
@@ -27,9 +28,10 @@ class MovieCrudController extends TimestampCrudController
             TextField::new('name')->setColumns(3),
             AssociationField::new('categories')->autocomplete()->setCrudController(CategoryCrudController::class)->setColumns(7),
             TextareaField::new('description')->onlyOnForms()->setColumns(12),
-            TextField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms(),
-            TextField::new('image')->setLabel('Image URL')->onlyOnForms(),
+            TextField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms()->setColumns(6),
+            TextField::new('image')->setLabel('Image URL')->onlyOnForms()->setColumns(6),
             ImageField::new('image')->setBasePath('/uploads/movies/images')->onlyOnIndex(),
+            TextField::new('videoFile')->setFormType(VichFileType::class)->onlyOnForms()->setColumns(12),
             NumberField::new('age_restriction'),
             DateField::new('publication_date')
         ], parent::configureFields($pageName));
