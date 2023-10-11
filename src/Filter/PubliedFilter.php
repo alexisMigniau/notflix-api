@@ -5,6 +5,8 @@ namespace App\Filter;
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
+use App\Entity\Movie;
+use App\Entity\Serie;
 use DateTimeImmutable;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\PropertyInfo\Type;
@@ -26,8 +28,14 @@ final class PubliedFilter extends AbstractFilter
             $comparison_sign = '<=';
         }
 
-        $queryBuilder
-            ->andWhere(sprintf("%s.publication_date %s '%s'", $rootAlias, $comparison_sign, $currentDate->format('Y-m-d')));
+        if($resourceClass === Movie::class) {
+            $queryBuilder
+                ->andWhere(sprintf("%s.publication_date %s '%s'", $rootAlias, $comparison_sign, $currentDate->format('Y-m-d')));
+        } else if($resourceClass === Serie::class) {
+            $queryBuilder
+                ->leftJoin('o.seasons','s')
+                ->andWhere(sprintf("s.publication_date %s '%s'", $comparison_sign, $currentDate->format('Y-m-d')));
+        }
     }
     
 
@@ -42,7 +50,7 @@ final class PubliedFilter extends AbstractFilter
                 'property' => $property,
                 'type' => Type::BUILTIN_TYPE_BOOL,
                 'required' => true,
-                'description' => 'Filter on publication date, if set to true return movies who are publied. If set to false, return movies in coming',
+                'description' => 'Filter on publication date, if set to true return media who are publied. If set to false, return media in coming',
             ];
         }
         return $description;

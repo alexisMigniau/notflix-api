@@ -2,6 +2,7 @@
 
 namespace App\Serializer;
 
+use App\Entity\Episode;
 use App\Entity\Movie;
 use App\Entity\Serie;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -40,6 +41,6 @@ final class ImageNormalizer implements NormalizerInterface, NormalizerAwareInter
             return false;
         }
         
-        return ($data instanceof Movie || $data instanceof Serie) ;
+        return ($data instanceof Movie || $data instanceof Serie || $data instanceof Episode) ;
     }
 }

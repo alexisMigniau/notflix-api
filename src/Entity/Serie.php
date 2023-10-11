@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
 use App\Entity\Trait\TimestampableTrait;
 use App\Repository\SerieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,15 +19,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use App\Filter\PubliedFilter;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
 #[Vich\Uploadable]
 #[ApiResource(
     operations: [
-        new GetCollection()
-    ],
-    normalizationContext: ['groups' => 'series:collection']
+        new GetCollection(normalizationContext: ['groups' => ['series:collection']]),
+        new Get(normalizationContext: ['groups' => ['series:item']])
+    ]
 )]
+#[ApiFilter(PubliedFilter::class, properties: ['publied'])]
 class Serie
 {
     use TimestampableTrait;
@@ -40,23 +43,23 @@ class Serie
     #[Gedmo\Slug(fields: ['name'])]
     #[ApiProperty(identifier: true)]
     #[ORM\Column(type : "string", length : 128, unique : true)]
-    #[Groups("series:collection")]
+    #[Groups(["series:collection", "series:item"])]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups("series:collection")]
+    #[Groups(["series:collection", "series:item"])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups("series:collection")]
+    #[Groups(["series:collection", "series:item"])]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups("series:collection")]
+    #[Groups(["series:collection", "series:item"])]
     private ?int $age_restriction = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'series')]
-    #[Groups("series:collection")]
+    #[Groups(["series:collection", "series:item"])]
     #[ApiFilter(SearchFilter::class, properties: ['categories.id' => 'exact'])]
     private Collection $categories;
 
@@ -68,12 +71,17 @@ class Serie
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups("series:collection")]
+    #[Groups(["series:collection", "series:item"])]
     private ?string $image = null;
+
+    #[ORM\OneToMany(mappedBy: 'serie', targetEntity: Season::class, orphanRemoval: true, cascade: ['persist'])]
+    #[Groups("series:item")]
+    private Collection $seasons;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->seasons = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -208,5 +216,45 @@ class Serie
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Season>
+     */
+    public function getSeasons(): Collection
+    {
+        return $this->seasons;
+    }
+
+    public function addSeason(Season $season): static
+    {
+        if (!$this->seasons->contains($season)) {
+            $this->seasons->add($season);
+            $season->setSerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSeason(Season $season): static
+    {
+        if ($this->seasons->removeElement($season)) {
+            // set the owning side to null (unless already changed)
+            if ($season->getSerie() === $this) {
+                $season->setSerie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSeasonCount(): int {
+        return $this->seasons->count();
+    }
+
+    public function getEpisodeCount(): int {
+        return $this->seasons->reduce(function(int $acc, Season $season ) {
+            return $acc + $season->getEpisodesCount();
+        }, 0);
     }
 }
